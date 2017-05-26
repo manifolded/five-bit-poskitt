@@ -1,3 +1,4 @@
+#!/usr/bin/python2
 import string
 from pandas import read_csv
 from itertools import cycle

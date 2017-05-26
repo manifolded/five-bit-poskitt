@@ -3,23 +3,6 @@ from pandas import read_csv
 from itertools import cycle
 
 # =======================================================================
-# Reads text from file in to a string, ignoring punctuation and (optionally) whitespace, 
-# and converting all characters to uppercase.
-def importTextAndStripToCaps(filename, removeSpacesQ):
-    result = ""
-    with open(filename) as handle:
-        while True:
-            c = handle.read(1)
-            if not c:
-                break
-            if removeSpacesQ and c.isspace():
-                continue
-            if c in string.punctuation:
-                continue
-            result += c.upper()
-    return result
-
-# =======================================================================
 # Performs replacements on a string, where those replacements are specified by a 
 # dictionary.
 def constructMask(msg, cde):
@@ -43,7 +26,7 @@ def encodeInCaps(txt, mask):
             char = txt_it.next()
         if m == '1':
             result += char.upper()
-        else:
+        else: # i.e. m == '0'
             result += char.lower()
 
     return result
@@ -52,8 +35,13 @@ def encodeInCaps(txt, mask):
 # =======================================================================
 # Main code begins here:
 
-text = importTextAndStripToCaps("lorem_ipsum.txt", False)
-message = importTextAndStripToCaps("message.txt", True)
+text = "Lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor " \
++"incididunt ut labore et dolore magna aliqua Ut enim ad minim veniam quis nostrud " \
++"exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat Duis aute " \
++"irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla " \
++"pariatur Excepteur sint occaecat cupidatat non proident sunt in culpa qui officia " \
++"deserunt mollit anim id est laborum"
+message = "RECOVERMEMCHIPSFURMANRETURNMATTHEWSSERINACRUCIAL"
 code = {'0':'00000', '1':'00001', '2':'00010', '3':'00011', '4':'00100', '5':'00101', 
     '6':'00110', '7':'00111', '8':'01000', '9':'01001', 'A':'01010', 'B':'01011', 
     'C':'01100', 'D':'01101', 'E':'01110', 'F':'01111', 'G':'10000', 'H':'10001',

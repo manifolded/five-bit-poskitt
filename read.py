@@ -3,15 +3,9 @@ from pandas import read_csv
 from itertools import cycle
 
 # =======================================================================
-# Reads text from file in to a string, ignoring punctuation and whitespace, and converting
-# all characters to uppercase.
+# Reads text from file in to a string, ignoring punctuation and (optionally) whitespace, 
+# and converting all characters to uppercase.
 def importTextAndStripToCaps(filename, removeSpacesQ):
-    #from https://stackoverflow.com/questions/2988211/how-to-read-a-single-character-at-a-time-from-a-file-in-python
-    #Also:
-    #   for whitespace removal: https://www.tutorialspoint.com/python/string_isspace.htm
-    #   for punctuation removal: https://www.dotnetperls.com/punctuation-python
-    #   to Upper Case letters: https://stackoverflow.com/questions/9257094/how-to-change-a-string-into-uppercase
-
     result = ""
     with open(filename) as handle:
         while True:
@@ -28,7 +22,6 @@ def importTextAndStripToCaps(filename, removeSpacesQ):
 # =======================================================================
 # Performs replacements on a string, where those replacements are specified by a 
 # dictionary.
-# https://stackoverflow.com/questions/6116978/python-replace-multiple-strings
 def constructMask(msg, cde):
     result = ""
     for c in msg:
@@ -60,21 +53,14 @@ def encodeInCaps(txt, mask):
 # Main code begins here:
 
 text = importTextAndStripToCaps("lorem_ipsum.txt", False)
-#print text
-
 message = importTextAndStripToCaps("message.txt", True)
-#print message
-
 code = {'0':'00000', '1':'00001', '2':'00010', '3':'00011', '4':'00100', '5':'00101', 
     '6':'00110', '7':'00111', '8':'01000', '9':'01001', 'A':'01010', 'B':'01011', 
     'C':'01100', 'D':'01101', 'E':'01110', 'F':'01111', 'G':'10000', 'H':'10001',
     'I':'10010', 'J':'10011', 'K':'10011', 'L':'10100', 'M':'10101', 'N':'10110',
     'O':'10111', 'P':'11000', 'Q':'11000', 'R':'11001', 'S':'11010', 'T':'11011',
     'U':'11100', 'V':'11101', 'W':'11110', 'X':'11110', 'Y':'11111', 'Z':'11111'}
-# print code
 
 msgMask = constructMask(message, code)
-#print msgMask
-
 print encodeInCaps(text, msgMask)
 

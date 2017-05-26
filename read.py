@@ -12,9 +12,9 @@ def importTextAndStripToCaps(filename):
     #   to Upper Case letters: https://stackoverflow.com/questions/9257094/how-to-change-a-string-into-uppercase
 
     result = ""
-    with open(filename) as file:
+    with open(filename) as handle:
         while True:
-            c = file.read(1)
+            c = handle.read(1)
             if not c:
                 #print "End of file."
                 break
@@ -30,28 +30,28 @@ def importTextAndStripToCaps(filename):
 # Performs replacements on a string, where those replacements are specified by a 
 # dictionary.
 # https://stackoverflow.com/questions/6116978/python-replace-multiple-strings
-def constructMask(message, code):
+def constructMask(msg, cde):
     result = ""
-    for c in message:
-        result += code[c]
+    for c in msg:
+        result += cde[c]
     return result
 
 # =======================================================================
-# Outputs the string, text, where the case (upper/lower) for each character is set 
+# Outputs the string, txt, where the case (upper/lower) for each character is set 
 # by the value of the mask array (either '1' or '0').
-def encodeInCaps(text, mask):
+def encodeInCaps(txt, mask):
     result = ""
-    text_it = text.iter()
+    txt_it = txt.iter()
     for m in mask:
         if m=='1':
-            result += text_it.upper()
+            result += txt_it.upper()
         else:
-            result += text_it.lower()
-        ++text_it
-        if !text_it: # @TODO - This is intended to check if we've reached the end of 
+            result += txt_it.lower()
+        txt_it += 1
+        if txt_it: # @TODO - This is intended to check if we've reached the end of 
         # the string and if so, bring us back to the beginning, but the syntax is 
         # wrong.  Ugh.
-            text_it = text.begin()            
+            txt_it = txt.begin()            
     return result
 
 # =======================================================================

@@ -1,4 +1,6 @@
+#!/Users/keith/anaconda/envs/py2/bin/python
 import sys
+import string
 
 # =======================================================================
 # =======================================================================
@@ -11,9 +13,8 @@ for line in sys.stdin:
 # Clean public - i.e. remove whitespace and punctuation
 cleaned = ""
 for char in public:
-    if char.isspace() or char in string.punctuation:
-        char.next()
-    cleaned += char
+    if not char.isspace() and not char in string.punctuation:
+        cleaned += char
 
 # Extract upper/lowercase state data
 encrypted = ""

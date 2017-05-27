@@ -1,4 +1,4 @@
-#!/usr/bin/python2
+#!/Users/keith/anaconda/envs/py2/bin/python
 import string
 from pandas import read_csv
 from itertools import cycle
